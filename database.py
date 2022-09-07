@@ -4,7 +4,7 @@ import sqlite3
 
 CREATE_MOVIES_TABLE ="""CREATE TABLE IF NOT EXISTS movies (
     title TEST,
-    release_timestramp REAL
+    release_timestramp REAL,
     watched INTEGER
 );
 """
@@ -18,8 +18,11 @@ SELECT_UPCOMMING_MOVIES = """SELECT * FROM movies
                                 WHERE relese_timestramp > ?;"""
 SELECT_WATCHED_MOVIES = """SELECT * FROM movies 
                                 WHERE watched = 1;"""
+SET_MOVIES_WATCHED = """UPDATE movies SET watched = 1
+                            WHERE title = ?;"""
 
 connection = sqlite3.connect("data.db")
+connection.row_factory = sqlite3.Row
 
 def create_tables():
     '''helps in creating the table'''
@@ -46,7 +49,8 @@ def get_movies(upcomming=False):
 
 def watch_movies(title):
     '''takes the movie title and marks it as watched'''
-
+    with connection:
+        connection.execute(SET_MOVIES_WATCHED,(title,))
 
 def get_watched_movies():
     '''gives the list of movies that have been watched'''
