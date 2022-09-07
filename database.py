@@ -15,11 +15,12 @@ INSERT_MOVIES = """INSERT INTO movies (
 ) values(?,?,0); """
 SELECT_ALL_MOVIES = "SELECT * FROM movies;"
 SELECT_UPCOMMING_MOVIES = """SELECT * FROM movies 
-                                WHERE relese_timestramp > ?;"""
+                                WHERE release_timestramp > ?;"""
 SELECT_WATCHED_MOVIES = """SELECT * FROM movies 
                                 WHERE watched = 1;"""
 SET_MOVIES_WATCHED = """UPDATE movies SET watched = 1
                             WHERE title = ?;"""
+DELETE_MOVIE = "DELET FROM movies WHERE title = ?"
 
 connection = sqlite3.connect("data.db")
 connection.row_factory = sqlite3.Row

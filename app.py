@@ -29,7 +29,7 @@ def print_movie_list(heading ,movies):
     for movie in movies:
         movie_date = datetime.datetime.fromtimestamp(movie["release_timestramp"])
         human_date = movie_date.strftime("%b %d %y")
-        print(f"{movie['title']} released on {human_date}")
+        print(f"{movie['title']} release on {human_date}")
     print("----\n")
 
 def prompt_watch_movie():
