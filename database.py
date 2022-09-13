@@ -48,6 +48,7 @@ INSERT_WATCHED_MOVIE = """INSERT INTO watched (user_name,movie_id) values (?,?)"
 SEARCH_MOVIES = "SELECT * FROM movies WHERE title LIKE ?"
 
 connection = sqlite3.connect("data.db")
+CREATE_RELEASE_INDEX = "CREATE INDEX IF NOT EXISTS idx_movies_release on movies(release_timestramp);"
 # connection.row_factory = sqlite3.Row
 
 def create_tables():
@@ -56,6 +57,7 @@ def create_tables():
         connection.execute(CREATE_MOVIES_TABLE)
         connection.execute(CREATE_USERS_TABLE)
         connection.execute(CREATE_WATCHED_TABLE)
+        connection.execute(CREATE_RELEASE_INDEX)
 
 def add_user(username):
     with connection:
